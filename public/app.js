@@ -10,7 +10,7 @@ const state = {
     phone: '',
     country: 'Kenya'
   },
-  isSandbox: true, // Sandbox mode enabled by default for developer ease
+  isSandbox: false, // Live checkout mode enabled by default
   balance: 15.00,
   totalEarned: 15.00,
   chatsCount: 3,
@@ -218,7 +218,7 @@ function toggleSandboxMode() {
   if (isChecked) {
     sandboxLabel.innerText = "Developer Sandbox Mode";
   } else {
-    sandboxLabel.innerText = "Live M-PESA Payout Mode";
+    sandboxLabel.innerText = "Live M-PESA Payment Mode";
   }
 }
 
