@@ -1,6 +1,6 @@
-# Walkthrough - Chat Na Wazungu Premium Clone
+# Walkthrough - Chat Na Wazungu Premium Clone (PayHero Edition)
 
-We have successfully built a premium, highly-interactive, responsive single-page web application that replicates the onboarding flow of the original **Chat Na Wazungu** and dramatically improves upon it by introducing a fully-functional **Earning Dashboard** and M-PESA payment integration.
+We have successfully built a premium, highly-interactive, responsive single-page web application that replicates the onboarding flow of the original **Chat Na Wazungu** and dramatically improves upon it by introducing a fully-functional **Earning Dashboard** and PayHero M-PESA STK Push integration.
 
 ---
 
@@ -14,8 +14,8 @@ We have successfully built a premium, highly-interactive, responsive single-page
 
 ### 2. Interactive Multi-Step Onboarding Wizard
 - **Step 1: Registration Form** - User display name, email, country, and password input with real-time field validation. Displays a glowing custom bonus invitation badge ("Invited by Mzunye").
-- **Step 2: M-PESA Payment Activation** - Connects to the **real Safaricom Daraja API** endpoint used in the original app (`https://newfliza.onrender.com/api/boosts/paye`) and polls for successful completions.
-- **Dual-Mode Sandbox Switch** - An advanced toggle at the top allows users to bypass Safaricom and test the STK Push prompt securely using simulated Daraja logs.
+- **Step 2: M-PESA Payment Activation** - Connects to the **PayHero Kenya STK Push API** via our server and polls for successful completions.
+- **Dual-Mode Sandbox Switch** - An advanced toggle at the top allows users to bypass PayHero and test the STK Push prompt securely using simulated logs.
 - **Step 3: Verification Success** - High-fidelity vector animated tick and celebration card.
 
 ### 3. Fully Interactive Simulated Earnings Dashboard
@@ -29,19 +29,18 @@ We have successfully built a premium, highly-interactive, responsive single-page
 
 ---
 
-## 🚀 How to Deploy on Render
+## 🚀 How to Deploy on Render with PayHero
 
 Deploying this application on [Render](https://render.com) is free and takes less than 3 minutes.
 
 ### Step 1: Code Pushed to GitHub
-The codebase has already been successfully initialized, configured, and pushed to your remote repository:
+The codebase has already been successfully configured to use **PayHero** and pushed to your remote repository:
 **[https://github.com/danielkiems51-blip/Chat-Wazungu.git](https://github.com/danielkiems51-blip/Chat-Wazungu.git)**
-There is no need to run git setup steps manually. All code files, templates, styles, and configurations are live in your repository branch `main`.
 
 ### Step 2: Set Up Web Service on Render
 1. Log in to your [Render Dashboard](https://dashboard.render.com).
 2. Click **New** (top right) ➡️ **Web Service**.
-3. Connect your GitHub account and select your `chatnawazungu-premium` repository.
+3. Connect your GitHub account and select your `Chat-Wazungu` repository.
 4. Configure the Web Service settings:
    - **Name**: `chat-na-wazungu` (or any custom name)
    - **Region**: Select the region closest to you (e.g., Oregon, Frankfurt)
@@ -51,12 +50,11 @@ There is no need to run git setup steps manually. All code files, templates, sty
    - **Start Command**: `node server.js`
    - **Instance Type**: `Free` (Standard free plan)
 5. Configure Environment Variables (in Render under **Environment** tab):
-   - Add `MPESA_ENV` with value `sandbox` (for testing) or `production` (for live).
-   - Add `MPESA_CONSUMER_KEY` and `MPESA_CONSUMER_SECRET` from your Safaricom Developer Portal.
-   - Add `MPESA_BUSINESS_SHORTCODE` (defaults to `174379` in Sandbox).
-   - Add `MPESA_PASSKEY` (defaults to `bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919` in Sandbox).
-   - Add `MPESA_CALLBACK_URL` with value `https://chat-na-wazungu.onrender.com/api/mpesa/callback` (replace with your actual Render domain!).
-6. Click **Deploy Web Service**. Render will build and deploy your service, giving you a live URL like `https://chat-na-wazungu.onrender.com`!
+   - Add `PAYHERO_API_USERNAME` with your PayHero API username.
+   - Add `PAYHERO_API_PASSWORD` with your PayHero API password.
+   - Add `PAYHERO_CHANNEL_ID` with your active Payment Channel ID from the PayHero dashboard.
+   - Add `PAYHERO_CALLBACK_URL` with value `https://chat-na-wazungu.onrender.com/api/payhero/callback` (replace `chat-na-wazungu` with your actual Render service domain name).
+6. Click **Deploy Web Service**. Render will build and deploy your service, giving you a live URL!
 
 ---
 
