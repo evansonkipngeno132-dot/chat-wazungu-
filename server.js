@@ -18,11 +18,16 @@ const PAYHERO_API_URL = 'https://backend.payhero.co.ke/api/v2';
 
 // Generate PayHero Basic Auth header
 function getPayHeroAuthHeader() {
+  const apiToken = process.env.PAYHERO_API_TOKEN || '';
+  if (apiToken && !apiToken.includes('YOUR_')) {
+    return 'Basic ' + apiToken;
+  }
+
   const username = process.env.PAYHERO_API_USERNAME || '';
   const password = process.env.PAYHERO_API_PASSWORD || '';
 
   if (!username || !password || username.includes('YOUR_') || password.includes('YOUR_')) {
-    throw new Error('PayHero API credentials are not configured in .env');
+    throw new Error('PayHero API credentials (PAYHERO_API_TOKEN or PAYHERO_API_USERNAME/PAYHERO_API_PASSWORD) are not configured in .env');
   }
 
   return 'Basic ' + Buffer.from(`${username}:${password}`).toString('base64');
